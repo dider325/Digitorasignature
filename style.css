@@ -82,7 +82,7 @@ button{font:inherit}
  .intro-block{top:65%}.scroll-indicator{top:64%}
 }
 @media(max-width:760px){
- .hero{min-height:920px;height:100svh;max-height:none}
+ .hero{min-height:1040px;height:100svh;max-height:none}
  .topbar{height:74px;left:5%;right:4%;grid-template-columns:1fr auto}
  .logo{font-size:25px}.menu-toggle{display:block;z-index:12}
  .primary-nav{display:none;position:absolute;left:auto;right:0;top:62px;width:190px;padding:18px;border:1px solid #ffffff22;background:#080808f7;flex-direction:column;align-items:flex-start;gap:13px}
@@ -91,13 +91,13 @@ button{font:inherit}
  .left-label i{margin-top:10px}
  .headline{font-size:clamp(47px,10vw,70px);line-height:.84;white-space:normal}
  .headline-left{left:5%;top:190px;width:90%;z-index:2}
- .headline-right{left:5%;right:auto;top:570px;width:90%;z-index:3}
- .product-stage{left:50%;top:280px;width:min(96vw,500px);z-index:3;transform:translateX(-50%)}
- .product{width:100%;max-height:330px;object-fit:contain}
- .intro-block{left:5%;top:435px;font-size:10px;z-index:5}
+ .headline-right{left:5%;right:auto;top:735px;width:90%;z-index:3}
+ .product-stage{left:50%;top:275px;width:min(100vw,440px);z-index:3;transform:translateX(-50%)}
+ .product{width:100%;height:auto;max-height:250px;object-fit:contain}
+ .intro-block{left:5%;top:510px;font-size:10px;z-index:5}
  .number-line{width:130px}.intro-block p{margin:9px 0 12px}
  .text-link{font-size:8px;gap:10px}
- .scroll-indicator{right:5%;top:445px;z-index:5}
+ .scroll-indicator{right:5%;top:515px;z-index:5}
  .bottom-word{font-size:clamp(100px,22vw,170px);bottom:38px;z-index:2}
  .hero-index{left:5%;bottom:13px;font-size:7px}
  .create-note{right:5%;bottom:105px}
@@ -106,14 +106,14 @@ button{font:inherit}
  .ambient-ribbed{width:35%}
 }
 @media(max-width:430px){
- .hero{min-height:920px}
+ .hero{min-height:1040px}
  .headline{font-size:clamp(43px,11.2vw,50px)}
  .headline-left{top:192px}
- .product-stage{left:50%;top:285px;width:96vw;transform:translateX(-50%)}
- .product{max-height:300px}
- .intro-block{top:425px}
- .headline-right{top:580px}
- .scroll-indicator{top:445px}
+ .product-stage{left:50%;top:275px;width:100vw;transform:translateX(-50%)}
+ .product{max-height:240px}
+ .intro-block{top:500px}
+ .headline-right{top:735px}
+ .scroll-indicator{top:505px}
  .bottom-word{font-size:24vw;bottom:42px}
  .create-note{bottom:96px}
 }

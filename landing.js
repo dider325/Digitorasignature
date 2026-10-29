@@ -7,6 +7,7 @@
 
   const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
   const total = 103;
+  const mobileStory = window.matchMedia('(max-width: 760px)').matches;
   const stops = [1, 11, 22, 33, 44, 55, 70, 81, 96, 103];
   const frameUrl = n => `assets/story-frames/frame-${String(n).padStart(3, '0')}.webp`;
   const frames = new Array(total + 1);
@@ -113,6 +114,7 @@
   // While there are story beats left, one deliberate wheel gesture advances one beat.
   // At the first/last beat, native page scrolling is deliberately released (no preventDefault).
   window.addEventListener('wheel', event => {
+    if (mobileStory) return;
     if (Math.abs(event.deltaY) < 2) return;
     const rect = section.getBoundingClientRect();
     const intersects = rect.bottom > 0 && rect.top < window.innerHeight;
@@ -141,11 +143,13 @@
   }, { passive: false });
 
   section.addEventListener('touchstart', event => {
+    if (mobileStory) return;
     touchStartY = event.touches[0]?.clientY ?? null;
     touchUsed = false;
   }, { passive: true });
 
   section.addEventListener('touchmove', event => {
+    if (mobileStory) return;
     if (touchStartY == null || !isAligned()) return;
     const y = event.touches[0]?.clientY ?? touchStartY;
     const delta = touchStartY - y;
@@ -162,9 +166,36 @@
   }, { passive: false });
 
   section.addEventListener('touchend', () => {
+    if (mobileStory) return;
     touchStartY = null;
     touchUsed = false;
   }, { passive: true });
+
+  // On phones, scroll naturally through a tall sticky story and map scroll progress to frames.
+  // This avoids preventing touch events, which was making the page feel stuck.
+  if (mobileStory) {
+    let scrollQueued = false;
+    const updateStoryFromScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const travel = Math.max(1, section.offsetHeight - window.innerHeight);
+      const progress = Math.max(0, Math.min(1, -rect.top / travel));
+      const frame = Math.round(1 + progress * (total - 1));
+      if (ready && !animating && frame !== current) {
+        draw(frame);
+        let nearest = 0;
+        for (let i = 1; i < stops.length; i++) {
+          if (Math.abs(stops[i] - current) < Math.abs(stops[nearest] - current)) nearest = i;
+        }
+        stopIndex = nearest;
+      }
+      scrollQueued = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (scrollQueued) return;
+      scrollQueued = true;
+      requestAnimationFrame(updateStoryFromScroll);
+    }, { passive: true });
+  }
 
   window.addEventListener('keydown', event => {
     if (!isAligned()) return;

@@ -1,6 +1,7 @@
 (() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const story = document.querySelector('.story-section');
+  const isMobile = window.matchMedia('(max-width: 760px)').matches;
   let lenis = null;
 
   // Smooth the entire document with Lenis. The frame-by-frame story remains
@@ -12,9 +13,10 @@
         duration: 1.35,
         easing: t => 1 - Math.pow(1 - t, 4),
         smoothWheel: true,
-        syncTouch: true,
-        wheelMultiplier: 0.82,
-        touchMultiplier: 1.15,
+        // Keep mobile touch scrolling native; Lenis smooths wheel/trackpad on desktop.
+        syncTouch: false,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1,
         anchors: false,
         lerp: 0.085,
         prevent: node => Boolean(node && node.closest && node.closest('.story-section'))

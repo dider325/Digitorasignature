@@ -146,3 +146,14 @@ html.lenis.lenis-stopped { overflow: hidden; }
 .scroll-reveal { opacity: 0; transform: translate3d(0, 34px, 0); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .95s cubic-bezier(.22,1,.36,1); transition-delay: var(--reveal-delay, 0ms); will-change: opacity, transform; }
 .scroll-reveal.is-revealed { opacity: 1; transform: translate3d(0, 0, 0); }
 @media (prefers-reduced-motion: reduce) { .scroll-reveal { opacity: 1; transform: none; transition: none; } }
+
+/* Mobile: use natural page scrolling through the frame story instead of gesture-locking the page. */
+@media (max-width: 760px) {
+  .story-section { height: 260svh !important; min-height: 260svh !important; overflow: visible !important; }
+  .story-sticky { position: sticky !important; top: 0 !important; height: 100svh !important; min-height: 520px !important; overflow: hidden !important; }
+  .story-frame-wrap { inset: 16% 0 12% !important; }
+  .story-copy-left { top: 12% !important; left: 5% !important; }
+  .story-copy-right { top: auto !important; bottom: 13% !important; right: 5% !important; }
+  .story-copy p { font-size: clamp(24px, 7vw, 38px) !important; }
+  .story-copy small { font-size: 7px !important; }
+}
